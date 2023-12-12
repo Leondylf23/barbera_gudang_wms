@@ -1,0 +1,59 @@
+*** POST TEMPLATE ***
+
+const messages = require("../../Constants/messages");
+const codes = require("../../Constants/codes");
+
+module.exports = {
+
+    pathName: "[request name]",
+
+    run: async (db, req, res) => {
+        try {
+
+        } catch (error) {
+            try{
+                res.status(500);
+                res.json({
+                    code: codes.errorBE,
+                    message: messages.error500,
+                });
+
+            } catch (err) {
+                console.error(err.message);
+            }
+            console.error(error.message);
+        }
+    }
+}
+
+*** PUT TEMPLATE ***
+
+const codes = require("../../Constants/codes");
+const message = require("../../Constants/messages");
+const multer = require("multer");
+
+module.exports = {
+  run: async (app, db, endpoint) => {
+    const upload = multer({ dest: "./TempFiles" });
+    
+    async function runFunc(req, res) {
+      try {
+        
+      } catch (error) {
+        try {
+          res.status(500);
+          res.json({
+            code: codes.errorBE,
+            message: message.error500,
+          });
+        } catch (err) {
+          console.error(err.message);
+        }
+        console.error(error);
+      }
+    }
+    app.put(`${endpoint}/[request name]`, [upload.single('file') | upload.array('files')], (req, res) => {
+        runFunc(req, res);
+    });
+  },
+};

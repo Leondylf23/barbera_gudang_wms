@@ -1,4 +1,4 @@
-export const beCodes = {
+module.exports = {
     success: 10,
     loginErr: 20,
     loginRequired: 21,
@@ -12,4 +12,4 @@ export const beCodes = {
     errorDB: 41,
     errorAPI: 42,
     customMsg: 99
-}
+};
