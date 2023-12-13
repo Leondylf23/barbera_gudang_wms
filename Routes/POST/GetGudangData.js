@@ -24,6 +24,7 @@ module.exports = {
 
             const [rows, _] = await con.execute(`
                 SELECT
+                    item.item_id AS id,
                     item.serial,
                     jenis.name AS jenis,
                     item.nama_item,
@@ -47,12 +48,21 @@ module.exports = {
                 ORDER BY
                     REGEXP_REPLACE ( serial, '[^0-9H]', '' ) ASC,
                     serial ASC
-                LIMIT ${offset}, 5000
+                LIMIT ${offset}, 5001
             `);
+
+            let isMore = false;
+            if(rows.length > 5000) {
+                isMore = true;
+                rows.pop();
+            }
 
             await con.destroy();
 
-            res.json(rows);
+            res.json({
+                data: rows,
+                is_more: isMore
+            });
 
         } catch (error) {
             try{

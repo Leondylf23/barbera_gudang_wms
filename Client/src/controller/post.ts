@@ -6,9 +6,9 @@ const endpointUrl = "/api/";
 export const getLoginInformation = async () => {
     return axios.post(`${endpointUrl}get-login-status`, {});
 }
-export const getGudangData = async (search: string) => {
+export const getGudangData = async (search: string, offset: number) => {
     try {
-        return await axios.post(`${endpointUrl}get-gudang-data`, {search});
+        return await axios.post(`${endpointUrl}get-gudang-data`, {search, offset});
     } catch (error) {
         errHandler(error);
     }
